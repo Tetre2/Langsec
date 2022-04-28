@@ -1,0 +1,7 @@
+define hook-stop
+
+x/1i $eip
+x/8wx $esp
+end
+
+break *0x8048601
